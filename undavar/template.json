@@ -1,0 +1,208 @@
+{
+  "Actor": {
+    "personaje": {
+      "datos": {
+        "numero": 0,
+        "nombre": "",
+        "procedencia": "",
+        "edad": "",
+        "rango": "",
+        "clase": "artista",
+        "gremio": "",
+        "maestro": "",
+        "sabioRegidor": "",
+        "descripcion": ""
+      },
+      "estado": {
+        "ptHerida": {
+          "value": 0,
+          "min": 0,
+          "max": 8
+        },
+        "ptSalud": {
+          "value": 8,
+          "min": 0,
+          "max": 8
+        }
+      },
+      "atributos": {
+        "fuerza": 0,
+        "velocidad": 0,
+        "agilidad": 0,
+        "inteligencia": 0
+      },
+      "pv": {
+        "value": 0,
+        "min": 0,
+        "max": 564
+      },
+      "pdc": {
+        "pc": 0,
+        "pe": 0,
+        "pr": 0,
+        "pd": 0,
+        "pp": 0,
+        "s": 0
+      },
+      "pa": {
+        "value": 2,
+        "min": 0,
+        "max": 18
+      },
+      "extensionEstado": {
+        "hambre": {
+          "value": 0,
+          "min": 0,
+          "max": 9
+        },
+        "sed": {
+          "value": 0,
+          "min": 0,
+          "max": 9
+        },
+        "cansancio": {
+          "value": 0,
+          "min": 0,
+          "max": 9
+        },
+        "fatiga": {
+          "value": 0,
+          "min": 0,
+          "max": 9
+        }
+      },
+      "puntosYMarcas": {
+        "po": {
+          "value": 0,
+          "max": 3,
+          "estado": "I"
+        },
+        "pol": {
+          "value": 0,
+          "estado": "I"
+        },
+        "marcaControl": {
+          "value": 0,
+          "max": 6,
+          "estado": "I"
+        }
+      },
+      "erianas": {
+        "oro": 0,
+        "rubi": 0,
+        "diamante": 0
+      },
+      "equipo": {
+        "cabeza": "",
+        "superior": "",
+        "collares": "",
+        "accesorios": "",
+        "inferior": "",
+        "pies": ""
+      },
+      "oficios": []
+    },
+    "npc": {
+      "datos": {
+        "nombre": "",
+        "raza": "",
+        "tipo": "ser",
+        "descripcion": ""
+      },
+      "atributos": {
+        "fuerza": 0,
+        "velocidad": 0,
+        "agilidad": 0,
+        "inteligencia": 0
+      },
+      "estado": {
+        "ptHerida": {
+          "value": 0,
+          "min": 0,
+          "max": 8
+        },
+        "ptSalud": {
+          "value": 8,
+          "min": 0,
+          "max": 8
+        }
+      },
+      "pa": {
+        "value": 6,
+        "min": 0,
+        "max": 6
+      }
+    }
+  },
+  "Item": {
+    "arte": {
+      "descripcion": "",
+      "nivel": 1,
+      "costo_pa": 4,
+      "invocacion": "",
+      "tipo": "artista",
+      "notas": ""
+    },
+    "arma": {
+      "descripcion": "",
+      "nivel": 1,
+      "costo_pa": 4,
+      "sellos": "",
+      "notas": ""
+    },
+    "objeto": {
+      "descripcion": "",
+      "efecto": "",
+      "duracion": "",
+      "enfriamiento": "",
+      "precio_oro": 0,
+      "precio_rubi": 0,
+      "precio_diamante": 0,
+      "cantidad": 1,
+      "notas": ""
+    },
+    "elixir": {
+      "descripcion": "",
+      "efecto": "",
+      "duracion": "",
+      "nivel": 0,
+      "precio_oro": 0,
+      "precio_rubi": 0,
+      "precio_diamante": 0,
+      "cantidad": 1,
+      "ofensivo": false,
+      "notas": ""
+    },
+    "oficio": {
+      "descripcion": "",
+      "facultades": "",
+      "puntos": 0,
+      "maximo": 7,
+      "logro": false,
+      "pol_requeridos": 5,
+      "bonos": {
+        "pe": 0,
+        "pp": 0,
+        "pd": 0,
+        "pc": 0,
+        "pr": 0,
+        "s": 0,
+        "fuerza": 0,
+        "velocidad": 0,
+        "agilidad": 0,
+        "inteligencia": 0,
+        "salud": 0
+      }
+    },
+    "equipo": {
+      "descripcion": "",
+      "efecto": "",
+      "reduccion_dano": 0,
+      "slot": "superior",
+      "precio_oro": 0,
+      "precio_rubi": 0,
+      "precio_diamante": 0,
+      "notas": ""
+    }
+  }
+}
