@@ -1,0 +1,518 @@
+/* ============================================================
+   UNDAVAR — Hoja de Estilos v12
+   ============================================================ */
+
+:root {
+  --undavar-negro:      #1a1614;
+  --undavar-oscuro:     #2c2420;
+  --undavar-medio:      #3d322c;
+  --undavar-dorado:     #c9a84c;
+  --undavar-dorado-cl:  #e8c96a;
+  --undavar-crema:      #f2ead8;
+  --undavar-crema-os:   #ddd0b0;
+  --undavar-rojo:       #8b2e2e;
+  --undavar-verde:      #2e6b3a;
+  --undavar-azul:       #2e4a6b;
+  --undavar-borde:      #5a4530;
+  --undavar-sombra:     rgba(0,0,0,0.5);
+  --font-titulo: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  --font-cuerpo: "Georgia", serif;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+.undavar-sheet {
+  background: var(--undavar-crema);
+  color: var(--undavar-negro) !important;
+  font-family: var(--font-cuerpo);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Cabecera ──────────────────────────────────────────────── */
+.sheet-header {
+  background: var(--undavar-negro);
+  border-bottom: 3px solid var(--undavar-dorado);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.actor-imagen, .item-imagen {
+  width: 72px; height: 72px; object-fit: cover;
+  border: 2px solid var(--undavar-dorado);
+  border-radius: 4px; cursor: pointer; flex-shrink: 0;
+}
+.actor-imagen:hover { opacity: 0.85; }
+.nombre-bloque { flex: 1; }
+
+/* FIX: nombre del actor — siempre visible con !important */
+.actor-nombre-input {
+  width: 100% !important;
+  background: rgba(0,0,0,0.35) !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px !important;
+  color: #e8c96a !important;
+  font-family: var(--font-titulo) !important;
+  font-size: 20px !important;
+  padding: 4px 8px !important;
+  margin-bottom: 4px;
+  display: block;
+}
+.actor-nombre-input:focus {
+  outline: none !important;
+  border-color: var(--undavar-dorado-cl) !important;
+  background: rgba(0,0,0,0.5) !important;
+}
+.actor-nombre-input::placeholder { color: #7a6050 !important; font-style: italic; }
+
+.rango-display { color: var(--undavar-dorado-cl); font-style: italic; font-size: 12px; margin-bottom: 6px; }
+.pv-bloque { display: flex; align-items: center; gap: 6px; }
+.pv-bloque label { font-size: 11px; color: var(--undavar-crema-os); }
+.pv-bloque input {
+  width: 60px !important;
+  background: var(--undavar-oscuro) !important;
+  color: var(--undavar-dorado-cl) !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px; padding: 2px 4px; text-align: center;
+  font-size: 14px; font-weight: bold;
+}
+.pv-max { color: var(--undavar-crema-os); font-size: 11px; }
+
+/* ── Botones de cabecera ───────────────────────────────────── */
+.header-tiradas { display: flex; flex-direction: column; gap: 5px; margin-left: auto; }
+
+/* ── Botones generales ─────────────────────────────────────── */
+.undavar-sheet button {
+  background: var(--undavar-oscuro) !important;
+  color: var(--undavar-dorado) !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-family: var(--font-cuerpo);
+  font-size: 12px;
+  transition: background 0.15s;
+}
+.undavar-sheet button:hover { background: var(--undavar-medio) !important; border-color: var(--undavar-dorado) !important; }
+.item-botones { display: flex; gap: 4px; margin-left: auto; }
+.item-botones button { padding: 2px 6px; font-size: 11px; }
+
+/* ── Barra de estado/atributos ─────────────────────────────── */
+.estado-atributos-bar {
+  background: var(--undavar-oscuro);
+  border-bottom: 2px solid var(--undavar-borde);
+  display: flex; gap: 12px; padding: 8px 12px; flex-wrap: wrap;
+}
+.bloque-titulo {
+  font-family: var(--font-titulo); font-size: 11px; font-weight: bold;
+  color: var(--undavar-dorado); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 6px;
+  border-bottom: 1px solid var(--undavar-borde); padding-bottom: 2px;
+}
+.bloque-estado, .bloque-atributos, .bloque-pdc { flex: 1; min-width: 160px; }
+
+/* Esto alinea el input y el botón en una sola fila */
+.atributo-control {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el conjunto */
+  gap: 8px;               /* Espacio entre el cuadro y el botón */
+  width: 100%;
+}
+
+/* Ajustamos el input para que no empuje al botón fuera */
+.atributo-control input {
+  flex: 0 1 60px;         /* Tamaño fijo para el cuadro de número */
+  margin: 0 !important;   /* Quitamos márgenes que estorben */
+  text-align: center;
+}
+
+/* Estilo para que el botón se vea integrado y no como un pegote */
+.btn-up-atr {
+  background: none !important;
+  border: none !important;
+  color: #c9a84c !important; /* Dorado Undavar */
+  cursor: pointer;
+  padding: 0 !important;
+  font-size: 1.3rem;        /* Tamaño del icono + */
+  width: auto !important;
+  flex: 0 0 auto;           /* Evita que el botón se estire */
+  box-shadow: none !important;
+}
+
+.btn-up-atr:hover {
+  color: #8b2e2e !important; /* Cambia a rojo al pasar el ratón */
+  transform: scale(1.2);    /* Crece un poquito */
+  transition: transform 0.1s ease;
+}
+
+/* Alineación general del ítem */
+.atributo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* FIX: inputs de estado — texto visible sobre fondo oscuro */
+.estado-fila { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+  margin-bottom: 4px; 
+  font-size: 12px; 
+  width: 100%; 
+}
+.estado-fila label { 
+  width: 80px; 
+  flex-shrink: 0 !important; 
+  color: var(--undavar-crema-os) !important; 
+  font-size: 11px; 
+}
+.estado-fila input { 
+  width: 48px !important; 
+  flex-shrink: 0 !important; 
+  background: var(--undavar-negro) !important; 
+  color: #f2ead8 !important; 
+  border: 1px solid var(--undavar-borde) !important; 
+  border-radius: 3px; 
+  padding: 2px 4px; 
+  text-align: center; 
+}
+.estado-max { 
+  flex-shrink: 0 !important; 
+  color: var(--undavar-crema-os); 
+  font-size: 11px; 
+}
+/* El texto de aviso se va a su propia línea alineado debajo del cuadro */
+.aviso-herida { 
+  color: var(--undavar-rojo); 
+  font-size: 11px; 
+  font-weight: bold; 
+  flex: 1;                  /* Toma exactamente el espacio que sobra, ni más ni menos */
+  min-width: 0;             /* Obliga a la caja a encogerse si choca con la pared */
+  white-space: nowrap;      /* Prohíbe bajar de línea */
+  overflow: hidden;         /* Oculta lo que no cabe */
+  text-overflow: ellipsis;  /* Pone los "..." */
+}
+
+/* FIX: inputs de atributos — texto visible */
+.atributos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.atributo-item { display: flex; align-items: center; gap: 5px; }
+.atributo-item label { color: var(--undavar-crema-os) !important; font-size: 11px; width: 75px; }
+.atributo-item input {
+  width: 44px !important;
+  background: var(--undavar-negro) !important;
+  color: #e8c96a !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px; padding: 2px 4px; text-align: center; font-weight: bold;
+}
+
+/* FIX: inputs de PDC — texto visible */
+.pdc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.pdc-item { display: flex; align-items: center; gap: 4px; }
+.pdc-item label { color: var(--undavar-crema-os) !important; font-size: 11px; width: 55px; }
+.pdc-item input {
+  width: 40px !important;
+  background: var(--undavar-negro) !important;
+  color: #f2ead8 !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px; padding: 2px; text-align: center;
+}
+
+/* ── Pestañas ──────────────────────────────────────────────── */
+.sheet-tabs {
+  background: var(--undavar-medio);
+  border-bottom: 2px solid var(--undavar-dorado);
+  display: flex; padding: 0 8px;
+}
+.sheet-tabs .item {
+  color: var(--undavar-crema-os) !important;
+  padding: 6px 12px; cursor: pointer; font-size: 12px;
+  border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap;
+}
+.sheet-tabs .item:hover { color: var(--undavar-dorado-cl) !important; background: var(--undavar-oscuro); }
+.sheet-tabs .item.active { color: var(--undavar-dorado) !important; border-bottom-color: var(--undavar-dorado); background: var(--undavar-negro); }
+
+/* ── Cuerpo ────────────────────────────────────────────────── */
+.sheet-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 12px; }
+.tab { display: none; }
+.tab.active { display: block; }
+
+/* ── Tab DATOS — campos con fondo blanco, texto negro ─────── */
+.datos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.datos-columna { display: flex; flex-direction: column; gap: 8px; }
+.campo-fila { display: flex; align-items: flex-start; gap: 8px; }
+
+/* FIX: labels visibles sobre fondo blanco */
+.campo-fila label {
+  font-size: 11px;
+  color: #5a4530 !important;
+  font-weight: bold;
+  width: 100px; flex-shrink: 0;
+  padding-top: 3px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* FIX: inputs del tab datos — texto negro sobre blanco */
+.campo-fila input[type="text"],
+.campo-fila input[type="number"],
+.campo-fila select,
+.campo-fila textarea {
+  flex: 1;
+  background: white !important;
+  border: 1px solid var(--undavar-crema-os) !important;
+  border-radius: 3px;
+  padding: 4px 6px;
+  font-family: var(--font-cuerpo);
+  font-size: 12px;
+  color: #1a1614 !important;
+}
+.campo-fila textarea { resize: vertical; }
+.campo-fila input:focus, .campo-fila select:focus, .campo-fila textarea:focus {
+  outline: none;
+  border-color: var(--undavar-dorado) !important;
+  box-shadow: 0 0 3px rgba(201,168,76,0.4);
+}
+
+.campo-rango .rango-texto {
+  flex: 1; background: var(--undavar-negro); color: var(--undavar-dorado);
+  border: 1px solid var(--undavar-borde); border-radius: 3px;
+  padding: 4px 8px; font-family: var(--font-titulo); font-size: 13px; font-style: italic;
+}
+.erianas-fila { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.erianas-fila span { font-size: 11px; color: #666; }
+.erianas-fila input { width: 60px; }
+
+/* ── Listas de ítems ───────────────────────────────────────── */
+.seccion-acciones { display: flex; gap: 8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--undavar-crema-os); }
+.items-lista { display: flex; flex-direction: column; gap: 4px; }
+.item-fila {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; background: white;
+  border: 1px solid var(--undavar-crema-os); border-radius: 4px; transition: border-color 0.15s;
+}
+.item-fila:hover { border-color: var(--undavar-dorado); }
+.arte-fila  { border-left: 3px solid var(--undavar-azul); }
+.arma-fila  { border-left: 3px solid var(--undavar-rojo); }
+.oficio-fila { border-left: 3px solid var(--undavar-verde); flex-direction: column; align-items: stretch !important; padding: 8px 10px !important; }
+.item-img { width: 28px; height: 28px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
+.item-nombre { 
+  flex: 1; 
+  font-size: 13px; 
+  color: var(--undavar-negro) !important; 
+  
+  /* REGLAS DE TRUNCAMIENTO */
+  white-space: nowrap;      /* Evita que el texto salte a una segunda línea */
+  overflow: hidden;         /* Oculta el texto que se sale del contenedor */
+  text-overflow: ellipsis;  /* Agrega los "..." al final del texto cortado */
+  min-width: 0;             /* Secreto de Flexbox: Obliga al contenedor a encogerse si es necesario */
+}
+
+.item-cant { color: #666; font-size: 12px; }
+.item-badge {
+  background: var(--undavar-oscuro); color: var(--undavar-crema) !important;
+  font-size: 10px; padding: 2px 6px; border-radius: 10px; white-space: nowrap;
+}
+.nivel-badge { background: var(--undavar-azul); }
+.nivel-badge.arma { background: var(--undavar-rojo); }
+.pa-badge { background: var(--undavar-medio); }
+.logro-badge { background: var(--undavar-dorado); color: var(--undavar-negro) !important; }
+.pts-badge { background: var(--undavar-oscuro); }
+.reduccion { background: var(--undavar-rojo); }
+.lista-vacia { text-align: center; color: #999; font-style: italic; padding: 20px; border: 1px dashed var(--undavar-crema-os); border-radius: 4px; }
+.nota-oficio { font-size: 11px; color: #555; font-style: italic; margin-bottom: 10px; padding: 6px 10px; background: #f8f4ec; border-left: 3px solid var(--undavar-dorado); border-radius: 2px; }
+
+/* ── Oficios ───────────────────────────────────────────────── */
+.oficio-selector-row { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--undavar-crema-os); }
+.oficio-selector-row select {
+  flex: 1; padding: 5px 8px;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 4px;
+  background: white !important;
+  color: var(--undavar-negro) !important;
+  font-family: var(--font-cuerpo); font-size: 12px;
+}
+.oficio-info-bloque { background: #f8f4ec; border: 1px solid var(--undavar-crema-os); border-left: 3px solid var(--undavar-verde); border-radius: 4px; padding: 8px 10px; margin-bottom: 4px; }
+.oficio-info-nombre { font-family: var(--font-titulo); font-size: 14px; font-weight: bold; color: var(--undavar-negro) !important; margin-bottom: 4px; }
+.oficio-info-desc   { font-size: 11px; color: #555 !important; margin-bottom: 4px; font-style: italic; }
+.oficio-info-facultades { font-size: 11px; color: #333 !important; white-space: pre-line; }
+.oficio-fila-contenido { flex: 1; }
+.oficio-fila > .item-botones { margin-top: 6px; justify-content: flex-end; }
+.oficio-fila-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.oficio-fila-header .item-nombre { font-weight: bold; font-size: 13px; }
+.oficio-fila-desc { font-size: 11px; color: #555 !important; font-style: italic; margin-bottom: 5px; }
+.oficio-pts-row { display: flex; align-items: center; gap: 6px; }
+.oficio-pts-label { font-size: 11px; color: #555; }
+.oficio-pts-input {
+  width: 44px !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px; padding: 2px 4px; text-align: center;
+  background: white !important;
+  color: var(--undavar-negro) !important;
+}
+
+/* ── Inventario ────────────────────────────────────────────── */
+.inventario-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.inv-col { display: flex; flex-direction: column; gap: 4px; }
+.inv-titulo {
+  font-family: var(--font-titulo); font-size: 13px; font-weight: bold;
+  color: var(--undavar-negro) !important;
+  border-bottom: 2px solid var(--undavar-dorado); padding-bottom: 4px; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 8px;
+}
+.inv-titulo button { padding: 1px 8px; font-size: 16px; font-weight: bold; }
+
+/* ── Referencia ────────────────────────────────────────────── */
+.referencia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ref-bloque { background: white; border: 1px solid var(--undavar-crema-os); border-radius: 6px; padding: 10px; }
+.ext-fila, .punto-fila { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 4px; }
+.ext-fila label, .punto-fila label { width: 80px; color: #555 !important; font-size: 11px; }
+.ext-fila input, .punto-fila input {
+  width: 44px !important;
+  border: 1px solid var(--undavar-crema-os) !important;
+  border-radius: 3px; padding: 2px 4px; text-align: center;
+  background: white !important; color: var(--undavar-negro) !important;
+}
+.punto-fila select { width: 42px; border: 1px solid var(--undavar-crema-os); border-radius: 3px; padding: 2px; font-size: 11px; }
+.ext-max, .punto-fila span { color: #999; font-size: 11px; }
+.aviso-estados { background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; padding: 4px 8px; font-size: 11px; color: #856404; margin-top: 4px; }
+.reglas-lista { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.reglas-lista li { font-size: 11px; color: #444 !important; padding-left: 12px; position: relative; }
+.reglas-lista li::before { content: "▸"; position: absolute; left: 0; color: var(--undavar-dorado); }
+.rangos-tabla { width: 100%; border-collapse: collapse; font-size: 11px; }
+.rangos-tabla th { background: var(--undavar-oscuro); color: var(--undavar-dorado) !important; padding: 4px 8px; text-align: left; }
+.rangos-tabla td { padding: 3px 8px; border-bottom: 1px solid var(--undavar-crema-os); color: var(--undavar-negro) !important; }
+.rangos-tabla .rango-actual { background: #fff8e6; font-weight: bold; }
+.rangos-tabla .rango-actual td:first-child::before { content: "▶ "; color: var(--undavar-dorado); }
+
+/* ── Chat de dados ─────────────────────────────────────────── */
+.undavar-roll { background: var(--undavar-crema); border: 1px solid var(--undavar-borde); border-radius: 6px; padding: 10px; font-family: var(--font-cuerpo); }
+.undavar-roll h3 { font-family: var(--font-titulo); color: var(--undavar-negro) !important; margin: 0 0 8px 0; border-bottom: 1px solid var(--undavar-borde); padding-bottom: 4px; font-size: 14px; }
+.dados-resultado { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.dado { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; font-size: 16px; font-weight: bold; border: 2px solid; }
+.dado.acierto { background: var(--undavar-verde); color: white !important; border-color: #1d4a28; }
+.dado.perdida  { background: var(--undavar-rojo);  color: white !important; border-color: #5c1e1e; }
+.roll-tabla { width: 100%; border-collapse: collapse; font-size: 12px; }
+.roll-tabla td { padding: 3px 6px; border-bottom: 1px solid var(--undavar-crema-os); color: var(--undavar-negro) !important; }
+.roll-tabla td:last-child { font-weight: bold; text-align: right; }
+
+/* ── Hoja de ítem ──────────────────────────────────────────── */
+.item-sheet .item-header {
+  background: var(--undavar-negro);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 2px solid var(--undavar-dorado);
+}
+.item-nombre-tipo { flex: 1; }
+
+/* FIX: nombre del ítem — siempre visible */
+.item-nombre-input {
+  width: 100% !important;
+  background: rgba(0,0,0,0.35) !important;
+  border: 1px solid var(--undavar-borde) !important;
+  border-radius: 3px !important;
+  color: #e8c96a !important;
+  font-family: var(--font-titulo) !important;
+  font-size: 18px !important;
+  padding: 4px 8px !important;
+  margin-bottom: 4px;
+}
+.item-nombre-input:focus { outline: none !important; border-color: var(--undavar-dorado-cl) !important; }
+.item-nombre-input::placeholder { color: #7a6050 !important; font-style: italic; }
+
+.item-tipo-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-style: italic; }
+.tipo-arte    { background: var(--undavar-azul);  color: white !important; }
+.tipo-arma    { background: var(--undavar-rojo);  color: white !important; }
+.tipo-objeto  { background: var(--undavar-verde); color: white !important; }
+.tipo-elixir  { background: #6b2e8b; color: white !important; }
+.tipo-oficio  { background: var(--undavar-medio); color: var(--undavar-dorado) !important; }
+.tipo-equipo  { background: #4a3d2e; color: var(--undavar-crema) !important; }
+.item-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.nivel-info { font-size: 10px; color: #888 !important; font-style: italic; margin-left: 6px; }
+.campos-linea { display: flex; gap: 12px; flex-wrap: wrap; }
+.campos-linea .campo-fila { flex: 1; min-width: 120px; }
+.precios { background: #f8f4ec; padding: 6px; border-radius: 4px; }
+.bonos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; background: #f8f4ec; padding: 8px; border-radius: 4px; }
+.bonos-grid .campo-fila label { width: 70px; }
+.bonos-grid .campo-fila input { width: 50px; }
+
+/* Oficio — vista de detalle (solo lectura) */
+.oficio-readonly-bloque { background: #f8f4ec; border: 1px solid var(--undavar-crema-os); border-radius: 4px; padding: 8px 10px; margin-bottom: 6px; }
+.oficio-readonly-text   { font-size: 12px; color: #444 !important; margin: 0; font-style: italic; }
+.oficio-facultades-text { font-size: 11px; color: #333 !important; white-space: pre-wrap; font-family: var(--font-cuerpo); margin: 0; line-height: 1.6; }
+.oficio-readonly-val    { font-size: 13px; color: var(--undavar-negro) !important; font-weight: bold; }
+.bonos-grid-readonly    { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 0; }
+.bono-chip { background: var(--undavar-verde); color: white !important; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+
+/* ── NPC ───────────────────────────────────────────────────── */
+.npc-acciones { display: flex; gap: 8px; padding: 8px 12px; background: var(--undavar-oscuro); border-bottom: 1px solid var(--undavar-borde); }
+.artes-seccion { padding: 12px; }
+.seccion-cabecera { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.seccion-cabecera h3 { margin: 0; font-family: var(--font-titulo); color: var(--undavar-negro) !important; }
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+.sheet-body::-webkit-scrollbar { width: 6px; }
+.sheet-body::-webkit-scrollbar-track { background: var(--undavar-crema-os); }
+.sheet-body::-webkit-scrollbar-thumb { background: var(--undavar-borde); border-radius: 3px; }
+.sheet-body::-webkit-scrollbar-thumb:hover { background: var(--undavar-dorado); }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width:600px) {
+  .datos-grid { grid-template-columns: 1fr; }
+  .referencia-grid { grid-template-columns: 1fr; }
+  .inventario-columnas { grid-template-columns: 1fr; }
+  .estado-atributos-bar { flex-direction: column; }
+}
+
+/* ── PA disponible en pestaña Artes ── */
+.pa-disponible-badge {
+  margin-left: auto;
+  background: var(--undavar-medio);
+  color: var(--undavar-crema);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  align-self: center;
+}
+
+/*---*\
+/* FORZAR SCROLL EN CUALQUIER COMPENDIO */
+.compendium.directory, 
+.compendium.directory .directory-list {
+    max-height: 600px !important; /* Si la ventana mide más de esto, sale el scroll */
+    height: 600px !important;     /* Altura fija para que no crezca hasta el infinito */
+    overflow-y: auto !important;
+}
+
+/* Evitar que se coma el botón de abajo */
+.compendium.directory .window-content {
+    overflow: hidden !important;
+}
+
+/* 1. Limitamos la altura de la ventana para que no se salga de la pantalla */
+.app.compendium.directory {
+    max-height: 85vh !important; /* Ocupará máximo el 85% de tu pantalla */
+    height: 700px !important;    /* Forzamos una altura inicial fija para probar */
+}
+
+/* 2. Preparamos el contenedor interno para el scroll */
+.app.compendium.directory .window-content {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important; /* Evita que el contenido "empuje" la ventana */
+}
+
+/* 3. Activamos el scroll solo en la lista de items */
+.app.compendium.directory .directory-list {
+    flex: 1 !important;
+    overflow-y: auto !important; /* Aquí es donde aparece la barra de scroll */
+    min-height: 0 !important;
+    padding-right: 8px;
+}
