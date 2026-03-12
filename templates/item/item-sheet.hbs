@@ -1,0 +1,197 @@
+<form class="undavar-sheet item-sheet" autocomplete="off">
+  <header class="item-header">
+    <img class="item-imagen" src="{{item.img}}" data-edit="img" title="{{item.name}}">
+    <div class="item-nombre-tipo">
+      <input type="text" class="item-nombre-input" name="name" value="{{item.name}}">
+      <span class="item-tipo-badge tipo-{{item.type}}">
+        {{#if (eq item.type "arte")}}Arte{{/if}}
+        {{#if (eq item.type "arma")}}Arma{{/if}}
+        {{#if (eq item.type "objeto")}}Objeto{{/if}}
+        {{#if (eq item.type "elixir")}}Elixir{{/if}}
+        {{#if (eq item.type "oficio")}}Oficio{{/if}}
+        {{#if (eq item.type "equipo")}}Equipo{{/if}}
+      </span>
+    </div>
+  </header>
+
+  <div class="item-body">
+
+    {{!-- ARTE --}}
+    {{#if (eq item.type "arte")}}
+    <div class="campo-fila">
+      <label>Tipo</label>
+      <select name="system.tipo">
+        <option value="artista"  {{#if (eq item.system.tipo "artista")}}selected{{/if}}>Solo Artista</option>
+        <option value="gladiador"{{#if (eq item.system.tipo "gladiador")}}selected{{/if}}>Solo Gladiador</option>
+        <option value="ambos"    {{#if (eq item.system.tipo "ambos")}}selected{{/if}}>Ambos</option>
+      </select>
+    </div>
+    <div class="campo-fila">
+      <label>Nivel</label>
+      <select name="system.nivel" data-dtype="Number">
+        {{#each niveles as |n|}}<option value="{{n}}" {{#if (eq ../item.system.nivel n)}}selected{{/if}}>{{n}}</option>{{/each}}
+      </select>
+      <span class="nivel-info">PA: {{calc.costoPANivel}} | PV para subir: {{calc.costoPVNivel}} | Bonus: +{{calc.bonusNivel}}</span>
+    </div>
+    <div class="campo-fila">
+      <label>Invocación / Frase</label>
+      <textarea name="system.invocacion" rows="3" placeholder="Ej: Yo, [Nombre], ordeno a la naturaleza...">{{item.system.invocacion}}</textarea>
+    </div>
+    <div class="campo-fila">
+      <label>Descripción / Efecto</label>
+      <textarea name="system.descripcion" rows="4" placeholder="Describe el efecto del arte...">{{item.system.descripcion}}</textarea>
+    </div>
+    <div class="campo-fila">
+      <label>Notas</label>
+      <textarea name="system.notas" rows="2">{{item.system.notas}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- ARMA --}}
+    {{#if (eq item.type "arma")}}
+    <div class="campo-fila">
+      <label>Nivel</label>
+      <select name="system.nivel" data-dtype="Number">
+        {{#each niveles as |n|}}<option value="{{n}}" {{#if (eq ../item.system.nivel n)}}selected{{/if}}>{{n}}</option>{{/each}}
+      </select>
+      <span class="nivel-info">PA: {{calc.costoPANivel}} | PV para subir: {{calc.costoPVNivel}} | Bonus: +{{calc.bonusNivel}}</span>
+    </div>
+    <div class="campo-fila">
+      <label>Descripción / Poder</label>
+      <textarea name="system.descripcion" rows="4" placeholder="Describe las propiedades del arma...">{{item.system.descripcion}}</textarea>
+    </div>
+    <div class="campo-fila">
+      <label>Sellos (si aplica)</label>
+      <textarea name="system.sellos" rows="3" placeholder="Describe los sellos del arma...">{{item.system.sellos}}</textarea>
+    </div>
+    <div class="campo-fila">
+      <label>Notas</label>
+      <textarea name="system.notas" rows="2">{{item.system.notas}}</textarea>
+    </div>
+    {{/if}}
+
+    {{!-- OBJETO --}}
+    {{#if (eq item.type "objeto")}}
+    <div class="campo-fila">
+      <label>Efecto</label>
+      <textarea name="system.efecto" rows="3">{{item.system.efecto}}</textarea>
+    </div>
+    <div class="campos-linea">
+      <div class="campo-fila"><label>Duración</label><input type="text" name="system.duracion" value="{{item.system.duracion}}" placeholder="Ej: 3 minutos"></div>
+      <div class="campo-fila"><label>Enfriamiento</label><input type="text" name="system.enfriamiento" value="{{item.system.enfriamiento}}"></div>
+      <div class="campo-fila"><label>Cantidad</label><input type="number" name="system.cantidad" value="{{item.system.cantidad}}" min="0"></div>
+    </div>
+    <div class="campos-linea precios">
+      <div class="campo-fila"><label>Precio Oro</label><input type="number" name="system.precio_oro" value="{{item.system.precio_oro}}" min="0"></div>
+      <div class="campo-fila"><label>Precio Rubí</label><input type="number" name="system.precio_rubi" value="{{item.system.precio_rubi}}" min="0"></div>
+      <div class="campo-fila"><label>Precio Diamante</label><input type="number" name="system.precio_diamante" value="{{item.system.precio_diamante}}" min="0"></div>
+    </div>
+    <div class="campo-fila"><label>Notas</label><textarea name="system.notas" rows="2">{{item.system.notas}}</textarea></div>
+    {{/if}}
+
+    {{!-- ELIXIR --}}
+    {{#if (eq item.type "elixir")}}
+    <div class="campo-fila">
+      <label>Efecto</label>
+      <textarea name="system.efecto" rows="3">{{item.system.efecto}}</textarea>
+    </div>
+    <div class="campos-linea">
+      <div class="campo-fila"><label>Duración</label><input type="text" name="system.duracion" value="{{item.system.duracion}}"></div>
+      <div class="campo-fila">
+        <label>Nivel</label>
+        <select name="system.nivel" data-dtype="Number">
+          <option value="0" {{#if (eq item.system.nivel 0)}}selected{{/if}}>Sin nivel</option>
+          {{#each niveles as |n|}}<option value="{{n}}" {{#if (eq ../item.system.nivel n)}}selected{{/if}}>{{n}}</option>{{/each}}
+        </select>
+      </div>
+      <div class="campo-fila"><label>Cantidad</label><input type="number" name="system.cantidad" value="{{item.system.cantidad}}" min="0"></div>
+    </div>
+    <div class="campo-fila">
+      <label>¿Ofensivo?</label>
+      <input type="checkbox" name="system.ofensivo" {{#if item.system.ofensivo}}checked{{/if}}>
+      <small>(Los elixires ofensivos se usan como armas)</small>
+    </div>
+    <div class="campos-linea precios">
+      <div class="campo-fila"><label>Oro</label><input type="number" name="system.precio_oro" value="{{item.system.precio_oro}}" min="0"></div>
+      <div class="campo-fila"><label>Rubí</label><input type="number" name="system.precio_rubi" value="{{item.system.precio_rubi}}" min="0"></div>
+      <div class="campo-fila"><label>Diamante</label><input type="number" name="system.precio_diamante" value="{{item.system.precio_diamante}}" min="0"></div>
+    </div>
+    <div class="campo-fila"><label>Descripción</label><textarea name="system.descripcion" rows="2">{{item.system.descripcion}}</textarea></div>
+    {{/if}}
+
+    {{!-- OFICIO --}}
+    {{#if (eq item.type "oficio")}}
+
+    <div class="campos-linea">
+      <div class="campo-fila">
+        <label>Puntos gastados</label>
+        <input type="number" name="system.puntos" value="{{item.system.puntos}}" min="0" max="7">
+        <span>/ {{item.system.maximo}}</span>
+      </div>
+      <div class="campo-fila">
+        <label>¿De logro?</label>
+        <input type="checkbox" name="system.logro" {{#if item.system.logro}}checked{{/if}}>
+      </div>
+      {{#if item.system.logro}}
+      <div class="campo-fila">
+        <label>P.OL requeridos</label>
+        <span class="oficio-readonly-val">{{item.system.pol_requeridos}}</span>
+      </div>
+      {{/if}}
+    </div>
+
+    {{!-- Descripción y facultades: usamos las variables enriquecidas del contexto --}}
+    <div class="oficio-readonly-bloque">
+      <div class="bloque-titulo" style="margin-bottom:6px;">Descripción del oficio</div>
+      <p class="oficio-readonly-text">{{oficioDescripcion}}</p>
+    </div>
+    <div class="oficio-readonly-bloque">
+      <div class="bloque-titulo" style="margin-bottom:6px;">Facultades</div>
+      <pre class="oficio-facultades-text">{{oficioFacultades}}</pre>
+    </div>
+
+    <div class="bloque-titulo" style="margin-bottom:6px;">Bonificaciones</div>
+    <div class="bonos-grid-readonly">
+      {{#if item.system.bonos.pe}}<span class="bono-chip">+{{item.system.bonos.pe}} PE</span>{{/if}}
+      {{#if item.system.bonos.pp}}<span class="bono-chip">+{{item.system.bonos.pp}} PP</span>{{/if}}
+      {{#if item.system.bonos.pd}}<span class="bono-chip">+{{item.system.bonos.pd}} PD</span>{{/if}}
+      {{#if item.system.bonos.pc}}<span class="bono-chip">+{{item.system.bonos.pc}} PC</span>{{/if}}
+      {{#if item.system.bonos.pr}}<span class="bono-chip">+{{item.system.bonos.pr}} PR</span>{{/if}}
+      {{#if item.system.bonos.s}}<span class="bono-chip">+{{item.system.bonos.s}} S</span>{{/if}}
+      {{#if item.system.bonos.fuerza}}<span class="bono-chip">+{{item.system.bonos.fuerza}} Fuerza</span>{{/if}}
+      {{#if item.system.bonos.velocidad}}<span class="bono-chip">+{{item.system.bonos.velocidad}} Velocidad</span>{{/if}}
+      {{#if item.system.bonos.agilidad}}<span class="bono-chip">+{{item.system.bonos.agilidad}} Agilidad</span>{{/if}}
+      {{#if item.system.bonos.inteligencia}}<span class="bono-chip">+{{item.system.bonos.inteligencia}} Inteligencia</span>{{/if}}
+      {{#if item.system.bonos.salud}}<span class="bono-chip">+{{item.system.bonos.salud}} Salud</span>{{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- EQUIPO --}}
+    {{#if (eq item.type "equipo")}}
+    <div class="campo-fila">
+      <label>Slot de equipo</label>
+      <select name="system.slot">
+        {{#each slots as |label key|}}
+        <option value="{{key}}" {{#if (eq ../item.system.slot key)}}selected{{/if}}>{{label}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="campo-fila">
+      <label>Reducción de daño</label>
+      <input type="number" name="system.reduccion_dano" value="{{item.system.reduccion_dano}}" min="0">
+    </div>
+    <div class="campo-fila">
+      <label>Efecto / Encanto especial</label>
+      <textarea name="system.efecto" rows="3">{{item.system.efecto}}</textarea>
+    </div>
+    <div class="campos-linea precios">
+      <div class="campo-fila"><label>Oro</label><input type="number" name="system.precio_oro" value="{{item.system.precio_oro}}" min="0"></div>
+      <div class="campo-fila"><label>Rubí</label><input type="number" name="system.precio_rubi" value="{{item.system.precio_rubi}}" min="0"></div>
+      <div class="campo-fila"><label>Diamante</label><input type="number" name="system.precio_diamante" value="{{item.system.precio_diamante}}" min="0"></div>
+    </div>
+    <div class="campo-fila"><label>Descripción</label><textarea name="system.descripcion" rows="3">{{item.system.descripcion}}</textarea></div>
+    <div class="campo-fila"><label>Notas</label><textarea name="system.notas" rows="2">{{item.system.notas}}</textarea></div>
+    {{/if}}
+
+  </div>
+</form>
