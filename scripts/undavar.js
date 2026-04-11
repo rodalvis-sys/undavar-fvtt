@@ -212,11 +212,22 @@ async function tiradaDanoNivel(actor, nivel, atr=0, label="Daño") {
 async function tiradaRebote(actor) {
   const roll = new Roll("4d6");
   await roll.evaluate();
-    // 🎲 MAGIA 3D
+  
+  // 🎲 MAGIA 3D
   if (game.dice3d) await game.dice3d.showForRoll(roll, game.user, true);
 
   const ds = roll.dice[0].results.map(r => r.result);
-  const s = roll.total;
+  
+  // CORRECCIÓN TÉCNICA:
+  // 1. Filtramos los aciertos (1,3,5).
+  // 2. Contamos la longitud del array resultante. Cada dado vale +1, 
+  // por lo que la longitud (length) es igual a tu suma total de aciertos.
+  const aciertos = ds.filter(d => [1, 3, 5].includes(d)).length;
+  
+  // Mantenemos la sumatoria de las caras para evaluar la "Suerte"
+  const sumaCaras = roll.total;
+  
+  // PV ganados (suma el valor numérico de las caras que fueron acierto)
   const pv = ds.filter(d => [1,3,5].includes(d)).reduce((a,b) => a+b, 0);
 
   ChatMessage.create({
@@ -225,10 +236,10 @@ async function tiradaRebote(actor) {
       <div class="dados-resultado" style="justify-content:center;">
         ${ds.map(d=>`<span class="dado ${[1,3,5].includes(d)?'acierto':'perdida'}">${d}</span>`).join("")}
       </div>
-      <p style="text-align:center;">Suma: <b>${s}</b> → ${s===3?"⚡ +1 Cansancio":s>3?"🔥 +1 Fatiga":"✅ Sin rebote"}</p>
+      <p style="text-align:center;">Suma: <b>${aciertos}</b> → ${aciertos===3?"⚡ +1 Cansancio":aciertos>3?"🔥 +1 Fatiga":"✅ Sin rebote"}</p>
       <table class="roll-tabla">
         <tr><td><b>PV ganados</b></td><td>${pv}</td></tr>
-        <tr><td><b>Suerte</b></td><td>${s > 12 ? "✨ Buena" : "💀 Mala"}</td></tr>
+        <tr><td><b>Suerte</b></td><td>${sumaCaras > 12 ? "✨ Buena" : "💀 Mala"}</td></tr>
       </table></div>`
   });
 }
